@@ -1,1 +1,1 @@
-react immutable
+This project focuses on implementing immutability concepts in programming, ensuring data integrity and enhancing application reliability. It highlights the creation and use of immutable data structures for robust, maintainable code.
