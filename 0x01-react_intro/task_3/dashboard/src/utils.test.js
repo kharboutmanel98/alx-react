@@ -1,5 +1,5 @@
-import { getFullYear, getFooterCopy } from '../../../task_1/dashboard/src/utilis';
-import { getLatestNotification } from '../../../task_2/dashboard/src/utilis';
+import { getFullYear, getFooterCopy } from '../../../task_1/dashboard/src/utils';
+import { getLatestNotification } from '../../../task_2/dashboard/src/utils';
 
 
 // Test for getFullYear
