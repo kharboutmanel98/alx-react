@@ -1,5 +1,6 @@
 {
   "name": "dashboard",
+  "homepage": "https://kharboutmanel98.github.io/alx-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,9 +41,11 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.3.0"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
   }
 }
