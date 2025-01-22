@@ -1,68 +1,102 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
 import { StyleSheet, css } from "aphrodite";
-import PropTypes from "prop-types";
 
-function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [enableSubmit, setEnableSubmit] = useState(false);
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      enableSubmit: false,
+    };
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+  }
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    props.logIn(e.target.elements.email.value, e.target.elements.password.value);
-  };
+  handleLoginSubmit(event) {
+    event.preventDefault();
 
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
+    const { email, password } = this.state;
 
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+    this.props.logIn(email, password);
+  }
 
-  useEffect(() => {
-    if (email !== "" && password !== "") {
-      setEnableSubmit(true);
-    } else {
-      if (enableSubmit !== false) {
-        setEnableSubmit(false);
-      }
-    }
-  }, [email, password]);
+  handleChangeEmail(event) {
+    const { value } = event.target;
+    const { password } = this.state;
 
-  return (
-    <React.Fragment>
-      <div className={css(styles["App-body"])}>
+    if (value !== "" && password !== "") this.setState({ enableSubmit: true });
+    else this.setState({ enableSubmit: false });
+
+    this.setState({ email: event.target.value });
+  }
+
+  handleChangePassword(event) {
+    const { value } = event.target;
+    const { email } = this.state;
+
+    if (email !== "" && value !== "") this.setState({ enableSubmit: true });
+    else this.setState({ enableSubmit: false });
+
+    this.setState({ password: event.target.value });
+  }
+
+  render() {
+    return (
+      <div className={css(styles.login)}>
         <p>Login to access the full dashboard</p>
-        <form onSubmit={handleLoginSubmit}>
+        <form action="" onSubmit={this.handleLoginSubmit}>
           <label htmlFor="email">Email:</label>
-          <input className={css(styles.input)} type="email" id="email" name="email" value={email} onChange={handleChangeEmail} />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className={css(styles.loginInput)}
+            value={this.state.email}
+            onChange={this.handleChangeEmail}
+          />
           <label htmlFor="password">Password:</label>
-          <input className={css(styles.input)} type="password" id="password" name="password" value={password} onChange={handleChangePassword} />
-          <input type="submit" value="Ok" disabled={!enableSubmit} />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className={css(styles.loginInput)}
+            value={this.state.password}
+            onChange={this.handleChangePassword}
+          />
+          <input type="submit" disabled={!this.state.enableSubmit} />
         </form>
       </div>
-    </React.Fragment>
-  );
+    );
+  }
 }
 
-Login.propTypes = {
-  logIn: PropTypes.func,
+const screenSize = {
+  small: "@media screen and (max-width: 900px)",
 };
 
 const styles = StyleSheet.create({
-  "App-body": {
-    fontSize: "1rem",
-    padding: "2em",
-    height: "45%",
-    "@media (max-width: 900px)": {
-      display: "flex",
-      flexDirection: "column",
+  login: {
+    margin: "50px",
+    flexGrow: 1,
+    [screenSize.small]: {
+      marginTop: "10px",
+      marginLeft: 0,
+      marginRight: 0,
+      marginBottom: 0,
     },
   },
 
-  input: {
-    margin: "10px",
+  loginInput: {
+    marginLeft: "10px",
+    marginRight: "20px",
+    [screenSize.small]: {
+      display: "block",
+      marginLeft: 0,
+      marginTop: "10px",
+      marginBottom: "10px",
+    },
   },
 });
 

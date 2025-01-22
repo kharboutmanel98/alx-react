@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.7",
+    "immutable": "^5.0.3"
+  }
+}
